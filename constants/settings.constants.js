@@ -7,8 +7,4 @@ const SETTINGS = {
   },
 }
 
-const DEFAULT_CHAT_SETTINGS = {
-  mode: SETTINGS.MODE.WARN,
-}
-
-module.exports = { SETTINGS, DEFAULT_CHAT_SETTINGS }
+module.exports = { SETTINGS }

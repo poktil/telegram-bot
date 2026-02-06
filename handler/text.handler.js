@@ -1,8 +1,13 @@
+const { CHATS } = require('../config/chats.config')
 const { SETTINGS } = require('../constants/settings.constants')
 const { findInsult } = require('../lib/insults.lib')
 const { getChatSettings } = require('../lib/settings.lib')
 
 async function textMessageHandler(ctx) {
+  const chatId = String(ctx.chat.id)
+
+  if (!CHATS.has(chatId)) return
+
   const { chat, from, message_id, text } = ctx.message
   const settings = getChatSettings(chat.id)
 
