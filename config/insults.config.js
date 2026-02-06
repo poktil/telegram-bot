@@ -3,6 +3,7 @@ const {
   RETRIEVE_INSULTS_PERIOD,
 } = require('../constants/insults.constants')
 const { fetchFromGitHub } = require('../lib/github/fetch.github')
+const { scheduleDailyTask } = require('../lib/schedule')
 
 const INSULTS = {
   [INSULTS_KEYS.PHRASES]: [],
@@ -49,19 +50,16 @@ function logInsultsUpdate(insultsJSON) {
 }
 
 async function updateInsults() {
-  try {
-    const insultsJSON = await fetchFromGitHub('insults.json')
-    if (!insultsJSON) return
+  const insultsJSON = await fetchFromGitHub('insults.json')
+  if (!insultsJSON) return
 
-    resetInsults()
-    processInsultsJSON(insultsJSON)
-    logInsultsUpdate(insultsJSON)
-  } catch (err) {
-    console.error('Failed to load insults from GitHub:', err)
-  }
+  resetInsults()
+  processInsultsJSON(insultsJSON)
+  logInsultsUpdate(insultsJSON)
 }
 
-updateInsults()
-setInterval(updateInsults, RETRIEVE_INSULTS_PERIOD)
+async function registerInsults() {
+  scheduleDailyTask(updateInsults, RETRIEVE_INSULTS_PERIOD)
+}
 
-module.exports = { INSULTS }
+module.exports = { INSULTS, registerInsults }

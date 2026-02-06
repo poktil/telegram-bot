@@ -17,8 +17,7 @@ function registerSettingsActions() {
     const mode = ctx.callbackQuery.data.split(':')[1]
     const modeText = SETTINGS.MODE[mode] || mode
 
-    updateChatSettings(ctx.chat.id, { mode: modeText })
-
+    await updateChatSettings(ctx.chat.id, { mode }, { 'settings.mode': mode })
     await ctx.editMessageText(`✅ Rejim o'rnatildi: ${modeText}`)
   })
 }
