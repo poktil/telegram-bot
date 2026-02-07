@@ -1,14 +1,15 @@
 const { CHATS } = require('../config/chats.config')
-const { updateOnFirestore } = require('../database/update')
+const { updateChatTitleInDb } = require('../database/chats/update')
+const { getChatId } = require('../utils/getChatId')
 
 async function newChatTitle(ctx) {
-  const chatId = String(ctx.chat.id)
+  const chatId = getChatId(ctx)
   const current = CHATS.get(chatId)
   if (!current) return
 
   const newTitle = ctx.message.new_chat_title
+  await updateChatTitleInDb(chatId, newTitle)
 
-  await updateOnFirestore('chats', chatId, { name: newTitle })
   CHATS.set(chatId, { ...current, name: newTitle })
 }
 

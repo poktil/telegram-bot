@@ -1,7 +1,8 @@
 async function helpCommand(ctx) {
   const texts = {
     private: "Meni guruhga qo'shing va men uni nazorat qilaman.",
-    supergroup: 'Guruhga nazoratim ostida ✅',
+    group: 'Guruh nazoratim ostida ✅',
+    supergroup: 'Guruh nazoratim ostida ✅',
   }
 
   let text = texts[ctx.chat.type] || texts['private']
