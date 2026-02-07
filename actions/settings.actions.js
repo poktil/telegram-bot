@@ -2,22 +2,25 @@ const { BOT } = require('../config/bot.config')
 const { SETTINGS } = require('../constants/settings.constants')
 const { InlineKeyboardMaker } = require('../utils/keyboard.util')
 const { updateChatSettings } = require('../lib/settings.lib')
-
-const MODE_LABELS = Object.fromEntries(
-  Object.entries(SETTINGS.MODE).map(([key, label]) => [label, key]),
-)
+const { settingsCommand } = require('../commands/settings.command')
+const { getModeLabels } = require('../utils/settings.util')
 
 function registerSettingsActions() {
   BOT.action('settings:mode', async (ctx) => {
-    const keyboard = InlineKeyboardMaker(MODE_LABELS, 'mode')
+    const keyboard = InlineKeyboardMaker(getModeLabels(), 'mode')
     await ctx.editMessageText('Rejimni tanlang:', keyboard)
   })
 
   BOT.action(/^mode:/, async (ctx) => {
     const mode = ctx.callbackQuery.data.split(':')[1]
-    const modeText = SETTINGS.MODE[mode] || mode
+    if (mode === 'settings') {
+      await settingsCommand(ctx, true)
+      return
+    }
 
-    await updateChatSettings(ctx.chat.id, { mode }, { 'settings.mode': mode })
+    const modeText = SETTINGS.DISPLAY[mode] || mode
+
+    await updateChatSettings(ctx, { mode })
     await ctx.editMessageText(`✅ Rejim o'rnatildi: ${modeText}`)
   })
 }
