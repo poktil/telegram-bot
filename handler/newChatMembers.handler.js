@@ -1,4 +1,4 @@
-async function newChatMembers(ctx) {
+async function newChatMembersHandler(ctx) {
   const newMembers = ctx.message.new_chat_members
   if (newMembers.length === 1) {
     const from = newMembers[0]
@@ -16,4 +16,4 @@ async function newChatMembers(ctx) {
   }
 }
 
-module.exports = { newChatMembers }
+module.exports = { newChatMembersHandler }
