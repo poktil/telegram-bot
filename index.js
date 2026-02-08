@@ -24,9 +24,14 @@ BOT.help(helpCommand)
 BOT.settings(settingsCommand)
 
 BOT.on(message('text'), textMessageHandler)
+BOT.on('photo', textMessageHandler)
+BOT.on('video', textMessageHandler)
+BOT.on('audio', textMessageHandler)
+BOT.on('document', textMessageHandler)
+BOT.on('edited_message', textMessageHandler)
+
 BOT.on('new_chat_title', newChatTitle)
 BOT.on('new_chat_members', newChatMembers)
-BOT.on('edited_message', textMessageHandler)
 
 registerSettingsActions()
 registerInsults()
