@@ -8,7 +8,9 @@ async function textMessageHandler(ctx) {
   const chatId = getChatId(ctx)
   if (!CHATS.has(chatId)) return
 
-  const { from, message_id, text } = ctx.message
+  const messages = ctx.message || ctx.editedMessage
+
+  const { from, message_id, text } = messages
   const settings = getChatSettings(ctx)
 
   if (settings.mode === SETTINGS.MODE.QUITE) return
