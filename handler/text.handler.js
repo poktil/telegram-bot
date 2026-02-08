@@ -10,7 +10,8 @@ async function textMessageHandler(ctx) {
 
   const messages = ctx.message || ctx.editedMessage
 
-  const { from, message_id, text } = messages
+  const { from, message_id } = messages
+  const text = messages.text || messages.caption || ''
   const settings = getChatSettings(ctx)
 
   if (settings.mode === SETTINGS.MODE.QUITE) return

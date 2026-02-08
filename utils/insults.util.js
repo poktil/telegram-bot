@@ -4,6 +4,7 @@ const { MAX_INSULTS_PER_TEXT } = require('../constants/insults.constants')
 const { normalizer } = require('../lib/normalizer.lib')
 
 function tokenize(text) {
+  if (!text) return []
   return text.match(/\p{L}+/gu) || []
 }
 
