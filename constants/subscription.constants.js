@@ -18,7 +18,7 @@ const SUBSCRIPTION_PLANS = {
   },
   ultimate: {
     name: 'ultimate',
-    price: 471900,
+    price: 411900,
     features: [
       'Barcha Premium reja xususiyatlari',
       `Checksiz so'zlar soni bilan xabarlarni tekshirish`,
