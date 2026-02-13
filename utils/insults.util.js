@@ -6,7 +6,12 @@ const { normalizer } = require('../lib/normalizer.lib')
 
 function tokenize(text) {
   if (!text) return []
-  return text.match(/\p{L}+/gu) || []
+
+  return text
+    .trim()
+    .split(/\s+/)
+    .map((w) => w.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, ''))
+    .filter(Boolean)
 }
 
 function checkWordsLimit(words, chatId) {
