@@ -6,17 +6,27 @@ const { findInsult } = require('../lib/insults.lib')
 
 async function textMessageHandler(ctx) {
   const chatId = getChatId(ctx)
-  if (!CHATS.has(chatId)) return
+  const current = CHATS.get(chatId)
+  if (!current) return
+
+  const plan = current.subscriptions?.plan
+  if (ctx.editedMessage) {
+    if (plan !== 'ultimate') return
+  }
 
   const messages = ctx.message || ctx.editedMessage
 
   const { from, message_id } = messages
+  if (messages.caption) {
+    if (plan === 'base') return
+  }
+
   const text = messages.text || messages.caption || ''
   const settings = getChatSettings(ctx)
 
   if (settings.mode === SETTINGS.MODE.QUITE) return
 
-  const result = findInsult(text, { containsOnly: true })
+  const result = findInsult(text, chatId, { containsOnly: true })
 
   if (result.error) {
     await ctx.reply(result.error, { reply_to_message_id: message_id })

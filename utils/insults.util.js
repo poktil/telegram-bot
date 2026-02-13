@@ -1,3 +1,4 @@
+const { CHATS } = require('../config/chats.config')
 const { INSULTS } = require('../config/insults.config')
 const { INSULTS_KEYS } = require('../constants/insults.constants')
 const { MAX_INSULTS_PER_TEXT } = require('../constants/insults.constants')
@@ -8,11 +9,16 @@ function tokenize(text) {
   return text.match(/\p{L}+/gu) || []
 }
 
-function checkWordsLimit(words) {
-  if (words.length <= MAX_INSULTS_PER_TEXT) return null
+function checkWordsLimit(words, chatId) {
+  const current = CHATS.get(chatId)
+  const plan = current.subscriptions?.plan
+  if (!plan) return null
+
+  const limit = MAX_INSULTS_PER_TEXT[plan]
+  if (words.length <= limit) return null
 
   return {
-    error: `Matnda ${words.length}ta so'z bor. Maksimal: ${MAX_INSULTS_PER_TEXT}ta`,
+    error: `Matnda ${words.length}ta so'z bor. Maksimal: ${limit}ta`,
   }
 }
 
