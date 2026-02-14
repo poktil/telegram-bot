@@ -15,7 +15,7 @@ async function myChatMemberHandler(ctx) {
       return
     }
 
-    const res = await addChatToDb(chatId, ctx.chat.title || 'No Title')
+    const res = await addChatToDb(chatId, ctx)
     if (!res.ok) {
       await ctx.reply(
         `Xatolik yuz berdi\n\n Menga murojaat qiling: @akbarswe_bot`,
