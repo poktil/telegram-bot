@@ -3,7 +3,7 @@ const { SUPABASE } = require('../db.init')
 async function getChatFromDb(telegramId) {
   try {
     const chatColumns = 'telegram_id, name, active, created_at, type, members'
-    const settingsColumns = 'telegram_id, mode'
+    const settingsColumns = 'telegram_id, mode, welcoming'
     const subscriptionsColumns = 'telegram_id, plan, expires_at'
 
     const { data: chat, error: chatError } = await SUPABASE.from('chats')
@@ -45,7 +45,7 @@ async function getChatFromDb(telegramId) {
 async function getAllChatsFromDb() {
   try {
     const chatColumns = 'telegram_id, name, active, created_at, type, members'
-    const settingsColumns = 'telegram_id, mode'
+    const settingsColumns = 'telegram_id, mode, welcoming'
     const subscriptionsColumns = 'telegram_id, plan, expires_at'
 
     const { data: chats, error: chatsError } =

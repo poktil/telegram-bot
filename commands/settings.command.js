@@ -4,7 +4,8 @@ const { InlineKeyboardMaker } = require('../utils/keyboard.util')
 async function settingsCommand(ctx, edit = false) {
   const keyboard = InlineKeyboardMaker(
     {
-      'Rejim (mode)': 'mode',
+      Rejim: 'mode',
+      'Hush kelibsiz': 'welcoming',
     },
     'settings',
   )
