@@ -24,7 +24,7 @@ async function textMessageHandler(ctx) {
   const text = messages.text || messages.caption || ''
   const settings = getChatSettings(ctx)
 
-  if (settings.mode === SETTINGS.MODE.QUITE) return
+  if (settings.mode === SETTINGS.MODE.QUIET.value) return
 
   const result = findInsult(text, chatId, { containsOnly: true })
 
@@ -35,7 +35,7 @@ async function textMessageHandler(ctx) {
 
   if (!result.containsInsult) return
 
-  const shouldDeleteWarn = settings.mode === SETTINGS.MODE.DELETE_WARN
+  const shouldDeleteWarn = settings.mode === SETTINGS.MODE.DELETE_WARN.value
   const name = from.username ? `@${from.username}` : from.first_name
   if (shouldDeleteWarn) {
     await ctx.deleteMessage()
@@ -43,10 +43,10 @@ async function textMessageHandler(ctx) {
     return
   }
 
-  const shouldDelete = settings.mode === SETTINGS.MODE.DELETE
+  const shouldDelete = settings.mode === SETTINGS.MODE.DELETE.value
   if (shouldDelete) await ctx.deleteMessage()
 
-  const shouldWarn = settings.mode === SETTINGS.MODE.WARN
+  const shouldWarn = settings.mode === SETTINGS.MODE.WARN.value
   if (shouldWarn) {
     await ctx.reply(`${name} odob saqlang!`, {
       reply_to_message_id: message_id,

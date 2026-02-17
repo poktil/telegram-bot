@@ -18,19 +18,8 @@ const { registerInsults } = require('./config/insults.config')
 const { registerChats } = require('./config/chats.config')
 const { launchBot } = require('./config/launch.config')
 
-// TEMP
-const {
-  collectDataMiddleware,
-  registerCollectedData,
-} = require('./config/collectData.config')
-// TEMP
-
 BOT.use(isPaidMiddleware)
 BOT.use(isAdminCommandMiddleware)
-
-// TEMP
-BOT.use(collectDataMiddleware)
-// TEMP
 
 BOT.start(startCommand)
 BOT.help(helpCommand)
@@ -51,9 +40,5 @@ BOT.on('my_chat_member', myChatMemberHandler)
 registerSettingsActions()
 registerInsults()
 registerChats()
-
-// TEMP
-registerCollectedData()
-// TEMP
 
 launchBot()

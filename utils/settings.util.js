@@ -1,14 +1,20 @@
 const { SETTINGS } = require('../constants/settings.constants')
 
-function getModeLabels() {
-  const MODE_LABELS = {
+function buildLabels(config) {
+  return {
     ...Object.fromEntries(
-      Object.entries(SETTINGS.DISPLAY).map(([key, label]) => [label, key]),
+      Object.values(config).map(({ text, value }) => [text, value]),
     ),
     '⬅️ Sozlamalarga qaytish': 'settings',
   }
-
-  return MODE_LABELS
 }
 
-module.exports = { getModeLabels }
+function getModeLabels() {
+  return buildLabels(SETTINGS.MODE)
+}
+
+function getWelcomingLabels() {
+  return buildLabels(SETTINGS.WELCOMING)
+}
+
+module.exports = { getModeLabels, getWelcomingLabels }

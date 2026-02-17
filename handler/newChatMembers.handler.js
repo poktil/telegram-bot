@@ -1,4 +1,12 @@
+const { CHATS } = require('../config/chats.config')
+const { getChatId } = require('../utils/getChatId')
+
 async function newChatMembersHandler(ctx) {
+  const chatId = getChatId(ctx)
+  const current = CHATS.get(chatId)
+
+  if (!current || !current.settings.welcoming) return
+
   const newMembers = ctx.message.new_chat_members
   if (newMembers.length === 1) {
     const from = newMembers[0]

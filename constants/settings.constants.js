@@ -1,15 +1,31 @@
 const SETTINGS = {
   MODE: {
-    DELETE: 'DELETE',
-    WARN: 'WARN',
-    DELETE_WARN: 'DELETE_WARN',
-    QUITE: 'QUITE',
+    DELETE: {
+      value: 'DELETE',
+      text: "🗑 O'chirish",
+    },
+    WARN: {
+      value: 'WARN',
+      text: '⚠️ Ogohlantirish',
+    },
+    QUIET: {
+      value: 'QUIET',
+      text: '🤫 Jim kuzatish',
+    },
+    DELETE_WARN: {
+      value: 'DELETE_WARN',
+      text: "🗑⚠️ O'chirish va ogohlantirish",
+    },
   },
-  DISPLAY: {
-    DELETE: "O'chirish",
-    WARN: 'Ogohlantirish',
-    DELETE_WARN: "O'chirish va ogohlantirish",
-    QUITE: 'Jim kuzatish',
+  WELCOMING: {
+    TRUE: {
+      value: true,
+      text: '✅ Yoniq',
+    },
+    FALSE: {
+      value: false,
+      text: "❌ O'chiq",
+    },
   },
 }
 
