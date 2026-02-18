@@ -28,4 +28,22 @@ async function updateChatTitleInDb(telegramId, newTitle) {
   }
 }
 
-module.exports = { updateChatSettingsInDb, updateChatTitleInDb }
+async function updateChatMembersInDb(telegramId, newMembers) {
+  try {
+    const { data, error } = await SUPABASE.from('chats')
+      .update({ members: newMembers })
+      .eq('telegram_id', telegramId)
+    if (error) throw error
+
+    return { ok: true, data }
+  } catch (err) {
+    console.error('Error updating chat members in DB:', err)
+    return { ok: false, error: err }
+  }
+}
+
+module.exports = {
+  updateChatSettingsInDb,
+  updateChatTitleInDb,
+  updateChatMembersInDb,
+}
