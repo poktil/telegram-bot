@@ -5,10 +5,13 @@ const { scheduleDailyTask } = require('../lib/schedule')
 const CHATS = new Map([])
 
 async function updateChats() {
+  const { updateMembersNumber } = require('../lib/chats.lib')
   const now = Date.now()
 
   const chats = await getAllChatsFromDb()
   if (!chats.ok) return
+
+  if (CHATS.size) await updateMembersNumber(chats.data)
 
   chats.data.forEach((chat) => {
     const expiresAtStr = chat.subscriptions?.expires_at

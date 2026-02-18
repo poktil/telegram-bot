@@ -9,4 +9,11 @@ function getChatId(ctx) {
   return null
 }
 
-module.exports = { getChatId }
+function getTelegramId(chatId, type = 'supergroup') {
+  if (type === 'private') return chatId
+  if (type === 'group') return -chatId
+  if (type === 'supergroup' || type === 'channel')
+    return Number(`-100${chatId}`)
+}
+
+module.exports = { getChatId, getTelegramId }
