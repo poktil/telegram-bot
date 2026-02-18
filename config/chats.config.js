@@ -31,8 +31,7 @@ function logChatsUpdate(chats) {
 }
 
 async function registerChats() {
-  // scheduleDailyTask(updateChats, RETRIEVE_CHATS_PERIOD)
-  scheduleDailyTask(updateChats, RETRIEVE_CHATS_PERIOD, '17:54:00')
+  scheduleDailyTask(updateChats, RETRIEVE_CHATS_PERIOD)
 }
 
 module.exports = { CHATS, registerChats }
