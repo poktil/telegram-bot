@@ -31,11 +31,10 @@ function processInsultsJSON(insultsJSON) {
     }
 
     let key = INSULTS_KEYS.OTHERS
-    const fChar = pattern[1]
-    const nChar = pattern[2]
+    const [char1, char2] = pattern.replace(/^\\b|\^/, '')
 
-    if (fChar >= 'a' && fChar <= 'z' && !['?', '*', '+'].includes(nChar)) {
-      key = fChar
+    if (char1 >= 'a' && char1 <= 'z' && !['?', '*', '+'].includes(char2)) {
+      key = char1
       if (!INSULTS[key]) INSULTS[key] = []
     }
 
