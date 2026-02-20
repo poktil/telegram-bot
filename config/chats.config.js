@@ -11,8 +11,6 @@ async function updateChats() {
   const chats = await getAllChatsFromDb()
   if (!chats.ok) return
 
-  if (CHATS.size) await updateMembersNumber(chats.data)
-
   chats.data.forEach((chat) => {
     const expiresAtStr = chat.subscriptions?.expires_at
     if (!chat?.active || !expiresAtStr) return
@@ -21,6 +19,7 @@ async function updateChats() {
     if (expiresAt > now) CHATS.set(chat.telegram_id, chat)
   })
 
+  await updateMembersNumber(chats.data)
   logChatsUpdate(Array.from(CHATS.values()))
 }
 
