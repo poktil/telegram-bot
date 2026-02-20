@@ -19,6 +19,7 @@ ${plan.features.map((f) => `• <i>${f}</i>`).join('\n')}
 `,
   )
   .join('\n')}
+Murojaat yoki oldindan to'lov uchun: @akbarswe_bot
 `
 }
 
