@@ -1,4 +1,3 @@
-const { RETRIEVE_CHATS_PERIOD } = require('../constants/chats.constants')
 const { getAllChatsFromDb } = require('../database/chats/get')
 const { scheduleDailyTask } = require('../lib/schedule')
 
@@ -30,7 +29,7 @@ function logChatsUpdate(chats) {
 }
 
 async function registerChats() {
-  scheduleDailyTask(updateChats, RETRIEVE_CHATS_PERIOD)
+  scheduleDailyTask(updateChats)
 }
 
 module.exports = { CHATS, registerChats }

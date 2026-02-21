@@ -3,7 +3,6 @@ const MAX_INSULTS_PER_TEXT = {
   premium: 70,
   ultimate: Infinity,
 }
-const RETRIEVE_INSULTS_PERIOD = 24 * 60 * 60 * 1000 // 24 hours
 const INSULTS_KEYS = {
   OTHERS: 'others',
   PHRASES: 'phrases',
@@ -16,7 +15,6 @@ const INSULT_LEVELS = {
 
 module.exports = {
   MAX_INSULTS_PER_TEXT,
-  RETRIEVE_INSULTS_PERIOD,
   INSULTS_KEYS,
   INSULT_LEVELS,
 }

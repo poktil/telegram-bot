@@ -1,7 +1,4 @@
-const {
-  INSULTS_KEYS,
-  RETRIEVE_INSULTS_PERIOD,
-} = require('../constants/insults.constants')
+const { INSULTS_KEYS } = require('../constants/insults.constants')
 const { fetchFromGitHub } = require('../lib/github/fetch.github')
 const { scheduleDailyTask } = require('../lib/schedule')
 
@@ -58,7 +55,7 @@ async function updateInsults() {
 }
 
 async function registerInsults() {
-  scheduleDailyTask(updateInsults, RETRIEVE_INSULTS_PERIOD)
+  scheduleDailyTask(updateInsults)
 }
 
 module.exports = { INSULTS, registerInsults }
