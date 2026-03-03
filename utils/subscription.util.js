@@ -29,12 +29,12 @@ function getDaysLeftText(expires_at) {
 
   const diffMs = expires - now
   const daysLeft = Math.ceil(diffMs / (24 * 60 * 60 * 1000) /* 1 day */)
+  const res = { days: daysLeft, text: `${daysLeft} kun qoldi` }
 
-  if (daysLeft === 1) return 'Ertaga tugaydi'
-  if (daysLeft === 2) return 'Indinga tugaydi'
-  if (daysLeft <= 0) return 'Muddati tugagan'
+  if (daysLeft < 0) res.text = 'Muddati tugagan'
+  if (daysLeft === 7) res.text = 'Bir hafta qoldi'
 
-  return `${daysLeft} kun qoldi`
+  return res
 }
 
 function formatExpireDate(expires_at) {
@@ -53,7 +53,7 @@ function buildSubscriptionMessage(subscription) {
 
 <b>Narxi:</b> <code>${formatPrice(planDetails.price)}</code>
 <b>Tugash sanasi:</b> <code>${formatExpireDate(subscription.expires_at)}</code>
-<b>Qolgan vaqt:</b> <code>${getDaysLeftText(subscription.expires_at)}</code>
+<b>Qolgan vaqt:</b> <code>${getDaysLeftText(subscription.expires_at).text}</code>
 
 Murojaat yoki oldindan to'lov uchun: @akbarswe_bot
 `
@@ -62,4 +62,5 @@ Murojaat yoki oldindan to'lov uchun: @akbarswe_bot
 module.exports = {
   buildPlansMessage,
   buildSubscriptionMessage,
+  getDaysLeftText,
 }
