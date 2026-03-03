@@ -4,7 +4,10 @@ const { scheduleDailyTask } = require('../lib/schedule')
 const CHATS = new Map([])
 
 async function updateChats() {
-  const { updateMembersNumber } = require('../lib/chats.lib')
+  const {
+    updateMembersNumber,
+    subscriptionExpirationCheck,
+  } = require('../lib/chats.lib')
   const now = Date.now()
 
   const chats = await getAllChatsFromDb()
@@ -19,6 +22,7 @@ async function updateChats() {
   })
 
   await updateMembersNumber(chats.data)
+  await subscriptionExpirationCheck(chats.data)
   logChatsUpdate(Array.from(CHATS.values()))
 }
 
